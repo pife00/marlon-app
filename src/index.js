@@ -1,19 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bulma/css/bulma.css'
+
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore,combineReducers,compose,applyMiddleware} from 'redux';
+
+import galleryReducer from './store/reducers/gallery'
+import bigPicture from './store/reducers/bigPicture';
+import productDetailsReducer from './store/reducers/productDetails'
+
+import thunk from 'redux-thunk'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios';
 
 //axios.defaults.baseURL=''
 
+const composeEnhancers = 
+process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__:null || compose;
+
+const rootReducer = combineReducers({
+  gallery:galleryReducer,
+  bigPicture:bigPicture,
+ // productDetails:productDetailsReducer
+})
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
+)
 
 ReactDOM.render(
+  <Provider store={store} >
   <BrowserRouter>
   <App />
   </BrowserRouter>
+  </Provider>
   ,
   document.getElementById('root')
 );

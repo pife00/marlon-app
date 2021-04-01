@@ -4,11 +4,15 @@ import Card from '../UI/Card/Card'
 const phoneCard = (props) =>{
     return(       
         <div className='column is-3' style={{display:'inline-block'}}>
-            <Card name='iphone' 
-            description='Telefono Caro  por dios mi riñon'  
-            source='https://tiendasishop.com/media/catalog/product/cache/6517c62f5899ad6aa0ba23ceb3eeff97/1/_/1_37.jpg'
-            link='ir'
-            price='10.000.000'
+            <Card name={props.name} 
+            id={props.id}
+            storage={props.storage}
+            camera={props.camera}
+            category={props.category}
+            source={props.source}
+            alter={props.alter}
+            link={props.url}
+            price={props.price}
             />
         </div>      
     )    

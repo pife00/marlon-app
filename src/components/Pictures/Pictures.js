@@ -1,28 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import BigPicture from "../BigPicture/BigPicture";
 import UploadPicture from "./UploadPicture/UploadPicture";
+import { connect } from "react-redux";
+import Modal from "../UI/Modal/Modal";
+import Loading from "../UI/Loading/Loading";
 
-const picture = (props) => {
+const Picture = (props) => {
+  const [isLoading, setLoading] = useState(false);
+
+  let image = null;
+
+  let loading = null;
+
+  const loadingHandler = (loading) => {
+    setLoading(loading);
+  };
+
+  if (isLoading) {
+    loading = (
+      <Modal>
+        <Loading />
+      </Modal>
+    );
+  }
+
+  if (props.imagePicture) {
+    image = props.imagePicture;
+  }
+
   return (
-    <div className='card'>
-      <div className='card-content'>
-    <div className="container mt-3">
-      
-      <div className='columns'>
-        <div className="column is-3">
-          <BigPicture image="https://media.wired.com/photos/5bcea2642eea7906bba84c67/master/w_2560%2Cc_limit/iphonexr.jpg" />
+    <div className="card">
+      <div className="card-content">
+        <div className="container mt-3">
+          <div className="columns">
+            <div className="column is-3">
+              <BigPicture image={image} />
+            </div>
+
+            <div className="column is-3 ">
+              <UploadPicture onSetLoading={loadingHandler} />
+            </div>
+          </div>
         </div>
-
-        <div className="column is-3 ">
-          <UploadPicture />
-        </div>
-
-      </div>
-    </div>
-
+        {loading}
       </div>
     </div>
   );
 };
 
-export default picture;
+const mapToStateToProps = (state) => {
+  return {
+    imagePicture: state.bigPicture.image,
+  };
+};
+
+export default connect(mapToStateToProps)(Picture);

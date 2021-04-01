@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import Pictures from "../../components/Pictures/Pictures";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import List from "../../components/List/List";
-
-
 import Aux from "../../hoc/Auxiliary";
 import {Route, Switch} from 'react-router-dom';
 
@@ -20,13 +18,12 @@ class Admin extends Component {
       },
       {
           title:'Telefono',
-          items:['Lista','Editar','Subir'],
-          links:['/admin/list','/admin/edit','/admin/upload']
+          items:['Lista','Subir'],
+          links:['/admin/list','/admin/upload']
       }
    ]
     return (
       <Aux>
-       
         <div className="columns">
           <div className="column is-2">
             <SideMenu menu={adminMenu} />

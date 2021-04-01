@@ -8,7 +8,7 @@ const items = (props) => {
   let items = [];
 
   for (let key in props.items) {
-    if(key == 'title'){
+    if(key === 'title'){
       title.push(<p key={props.items[key]} className='menu-label' >{props.items[key]}</p>)
     }
   }
