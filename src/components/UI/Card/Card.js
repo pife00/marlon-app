@@ -2,7 +2,6 @@ import React from "react";
 
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
-import * as actionTypes from '../../../store/actions/index';
 
 const Card = (props) => {
 
@@ -42,9 +41,9 @@ const Card = (props) => {
 
   return (
     <div className="card">
-      <div className="card-image">
-        <figure className="image is-3by4">
-          <img
+      <div className="card-image ">
+        <figure className="image is-4by5" >
+          <img 
             src={props.source}
             alt={props.alter}
           />
@@ -53,7 +52,7 @@ const Card = (props) => {
       <div className="card-content">
         
         <div className='text-center'>
-          <p className='title is-uppercase has-text-light-dark'>{props.name} </p>
+          <p className='subtitle is-uppercase has-text-light-dark'>{props.name} </p>
         </div>
         
 

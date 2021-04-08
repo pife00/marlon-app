@@ -1,9 +1,16 @@
 import React from 'react'
 import Card from '../UI/Card/Card'
+import { useMediaQuery } from 'react-responsive';
 
-const phoneCard = (props) =>{
+const PhoneCard = (props) =>{
+
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)'})
+
+
+    const style = isMobile === true ? {display:'inline'} : {display:'inline-block'} ;
+
     return(       
-        <div className='column is-3' style={{display:'inline-block'}}>
+        <div className='column is-4' style={style}>
             <Card name={props.name} 
             id={props.id}
             storage={props.storage}
@@ -18,4 +25,4 @@ const phoneCard = (props) =>{
     )    
 }
 
-export default phoneCard
+export default PhoneCard

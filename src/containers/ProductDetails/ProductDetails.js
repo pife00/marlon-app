@@ -3,6 +3,7 @@ import BigPicture from "../../components/BigPicture/BigPicture";
 import Details from "../../components/Details/Details";
 import { connect } from "react-redux";
 import CirclePick from '../../components/UI/Cicle/Circle'
+
 class ProductDetails extends Component {
 
   state={
@@ -71,12 +72,14 @@ class ProductDetails extends Component {
               </div>
           </div>
         </div>
-        <div className="column is-5">
+        <div className="column is-5 m-2">
+         
           <h1 className='title is-uppercase has-text-light-dark' > {product.name} </h1>
           {details}
           <hr />
           <p className='subtitle' >Colores</p>
           {colorSelect}
+          
         </div>
         </div>
       </div>
@@ -86,8 +89,8 @@ class ProductDetails extends Component {
 
 const mapToStateToProps = (state) => {
   return {
-    phoneDocuments:state.gallery.phones,
-    accessoriesDocuments:state.gallery.accessories
+    phoneDocuments:state.gallery.visiblePhones,
+    accessoriesDocuments:state.gallery.visibleAccessories
   };
 };
 

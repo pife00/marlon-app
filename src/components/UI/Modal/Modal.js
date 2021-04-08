@@ -1,14 +1,22 @@
 import React from "react";
-import classes from "./modal.module.css";
 
-const modal = (props) => {
+const Modal = (props) => {
+
+  const closeModal = () =>{
+    props.closeModal('modal')
+  }
+
+
+
   return (
-    <div className={classes.modal}>
-      <div className="modal-content ">
-      {props.children}
-      </div>
+    <div className={props.modalStatus}>
+      <div className="modal-background"></div>
+      <div className="modal-content">{props.children}</div>
+      <button 
+      onClick={closeModal}
+      className="modal-close is-large" aria-label="close"></button>
     </div>
   );
 };
 
-export default modal;
+export default Modal;

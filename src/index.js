@@ -8,7 +8,7 @@ import {createStore,combineReducers,compose,applyMiddleware} from 'redux';
 
 import galleryReducer from './store/reducers/gallery'
 import bigPicture from './store/reducers/bigPicture';
-import productDetailsReducer from './store/reducers/productDetails'
+import auth from './store/reducers/auth';
 
 import thunk from 'redux-thunk'
 import './index.css';
@@ -23,7 +23,7 @@ process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPO
 const rootReducer = combineReducers({
   gallery:galleryReducer,
   bigPicture:bigPicture,
- // productDetails:productDetailsReducer
+  auth: auth,
 })
 
 const store = createStore(

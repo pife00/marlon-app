@@ -11,6 +11,7 @@ import {IoIosAdd} from 'react-icons/io'
 import { ChromePicker } from 'react-color'
 import {IoIosRefresh} from 'react-icons/io';
 import CirclePick from '../../UI/Cicle/Circle';
+import InputCurrency from '../../UI/InputCurrency/InputCurrency';
 
 const UploadPicture = (props) => {
   const [enterPhone, setPhone] = useState({
@@ -31,8 +32,7 @@ const UploadPicture = (props) => {
 
   const nameImage = enterFileImage.imageName ? enterFileImage.imageName : null;
 
-
-  const imageHandler = (event) => {
+  const imageHandler =  async(event) => {
     let file = event.target.files[0];
     let fileName = event.target.files[0].name;
     let filePreview = URL.createObjectURL(file);
@@ -44,9 +44,11 @@ const UploadPicture = (props) => {
       imageFile: file,
       imageName: fileName,
     }));
+
   };
 
   const imageUploader = async (file) => {
+   
     const storageRef = firebase.storage().ref("/images");
     const imageRef = storageRef.child(enterFileImage.imageName);
 
@@ -84,15 +86,16 @@ const UploadPicture = (props) => {
 
     };
 
-    if (doc.imageUrl != "") {
+    if (doc.imageUrl !== "") {
       const db = firebase.firestore();
       const docRef = db.collection("phones").doc(id);
-      let setDoc = docRef
+      docRef
         .set({
           ...doc,
         })
         .then(() => {})
         .catch((error) => {
+          props.onSetLoading(false)
           console.log(error);
         });
     }
@@ -117,6 +120,13 @@ const UploadPicture = (props) => {
     event.preventDefault();
     setColorPick([]);
   }
+
+  const priceHandler = (number) => {
+    setPhone((state) => ({
+      ...state,
+      price: number,
+    }));
+  };
 
   const clearPhoneState = (category) =>{
     setPhone((prevState)=>(
@@ -150,6 +160,8 @@ const UploadPicture = (props) => {
         default:
           category = 'Telefono'
     }
+
+    setFileImage('');
 
     clearPhoneState(category)
      
@@ -209,18 +221,9 @@ const UploadPicture = (props) => {
         <div className="field">
           <label className="label MyText">Precio</label>
           <div className="control">
-            <input
-              name="storage"
-              className="input"
-              type="number"
-              placeholder="Precio"
-              value={enterPhone.price}
-              onChange={(event) => {
-                setPhone((state) => ({
-                  ...state,
-                  price: parseInt(event.target.value),
-                }));
-              }}
+            <InputCurrency 
+             price={priceHandler}
+             value={enterPhone.price}
             />
           </div>
         </div>
@@ -341,12 +344,9 @@ const UploadPicture = (props) => {
 
         <div style={{ marginTop: "5px" }} className="field is-grouped  mt-2">
           <div className="control">
-            <button onClick={sendPhoneHandler} className="button is-info">
-              Cancelar
-            </button>
           </div>
           <div className="control">
-            <button type="submit" className="button is-link is-light">
+            <button disabled={enterFileImage ? false:true} type="submit" className="button is-link is-light">
               Subir
             </button>
           </div>
@@ -450,12 +450,9 @@ const UploadPicture = (props) => {
 
         <div style={{ marginTop: "5px" }} className="field is-grouped  mt-2">
           <div className="control">
-            <button className="button is-info">
-             Cancelar
-            </button>
           </div>
           <div className="control">
-            <button type="submit" className="button is-link is-light">
+            <button disabled={enterFileImage ? false:true} type="submit" className="button is-link is-light">
               Subir
             </button>
           </div>
@@ -468,10 +465,10 @@ const UploadPicture = (props) => {
   return (
     <div>
       <div className="field">
-      <button disabled={enterPhone.category != 'Accesorio'} onClick={resetAll} className='button is-white mr-1'>
+      <button disabled={enterPhone.category !== 'Accesorio'} onClick={resetAll} className='button is-white mr-1'>
       <BsPhone size="3em" color='hsl(204, 86%, 53%)' />
       </button>
-      <button disabled={enterPhone.category != 'Telefono'} onClick={resetAll} className='button is-white'>
+      <button disabled={enterPhone.category !== 'Telefono'} onClick={resetAll} className='button is-white'>
       <FiHeadphones size="3em" color='hsl(204, 86%, 53%)' />
       </button>
       </div>

@@ -1,5 +1,8 @@
 export {
-    phoneDocumentsInit,
+    documentsInit,
+    phoneVisibleInit,
+    accessoriesVisibleInit,
+    searchPhone,
 }from './gallery';
 
 export {
@@ -7,5 +10,6 @@ export {
 }from './bigPicture'
 
 export {
-    setProductsDetailsById,
-}from './productDetails'
+    userInit,
+    cleanUser,
+}from './auth';

@@ -12,8 +12,8 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.modal-content {
+.modalContent {
     position: fixed; /* or absolute */
-    top: 30%;
-    left: 50%;
+     top: 20%;
+     left: 40%
   }

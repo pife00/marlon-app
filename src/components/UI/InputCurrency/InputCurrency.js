@@ -9,7 +9,6 @@ const InputCurrency = (props) => {
     }
   },[])
 
-  const [valueNumber, setValueNumber] = useState(0);
   const [fake, setFake] = useState("");
 
   const noDot = (data) =>{
